@@ -29,7 +29,7 @@ simple_shell is designed to run in the Ubuntu linux environment and to be compil
 ## Installation
 _________________
 
-* Clone this repository: https://github.com/tinsaye1945/simple_shell.git
+* Clone this repository: https://github.com/AngieKoki/simple_shell.git
 * Change directories into the repository: cd simple_shell
 * Compile: gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 * Run the shell: ./hsh
