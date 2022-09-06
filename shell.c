@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
 	int fork_h, status = 1, getline_handler;
 	char *inp = NULL;
-	int inp_size = 0;
+	size_t inp_size = 0;
 
 	while (status)
 	{
@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
+			wait(NULL);
 			printf("I am the father");
 			break;
 		}
