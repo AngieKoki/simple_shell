@@ -11,13 +11,27 @@ int main(int argc, char *argv[])
 {
 	int fork_h, status = 1, getline_handler;
 	char *inp = NULL;
+	int inp_size = 0;
 
 	while (status)
 	{
 	if (isatty(STDIN_FILENO) == 1)
 		write(STDOUT_FILENO, "#cisfun$ ", 10);
-	signal(SIGINT, signals);
-	getline_handler = getline(&inp, 
+	//signal(SIGINT, signals);
+	getline_handler = getline(&inp, &inp_size, stdin);
+	if (getline_handler < 0)
+		{
+			perror("Error! unable to get line");
+			free(inp);
+			exit(0);
+		}
+		if (getline_handler == 1)
+		{
+			free(inp);
+			continue;
+		}
+		if (getline_handler != EOF)
+		{
 		fork_h = fork();
 		if (fork_h == -1)
 		{
@@ -34,6 +48,7 @@ int main(int argc, char *argv[])
 			printf("I am the father");
 			break;
 		}
+	}
 	}
 	return (0);
 }
