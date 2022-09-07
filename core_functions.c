@@ -132,7 +132,7 @@ int execute(char **arg, char **argv, int counter)
 	if (WIFEXITED(status))
 		status_output = WEXITSTATUS(status);
 	free(buffer);
-	return(status_output);
+	return (status_output);
 }
 /**
  * _which - search ofr a command in the directories

@@ -1,56 +1,51 @@
 #include "simple_shell.h"
 
-extern char **environ;
 /**
  * main - the entry point to the program
  * @argc: the argument counter
  * @argv: the argument vector containing commands passed in
  * Return: 0 when successful
  */
-int main(int argc, char *argv[])
+int main(int __attribute__((unused))argc, char *argv[], char **env)
 {
-	int fork_h, status = 1, getline_handler;
-	char *inp = NULL;
-	size_t inp_size = 0;
+	int status_output = 0, status = 1, counter = 0;
 
 	while (status)
 	{
-	if (isatty(STDIN_FILENO) == 1)
-		write(STDOUT_FILENO, "#cisfun$ ", 10);
-	//signal(SIGINT, signals);
-	getline_handler = getline(&inp, &inp_size, stdin);
-	if (getline_handler < 0)
+		char *command_line = NULL, **arg = NULL;
+		size_t line_size = 0;
+
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "#cisfun$ ", 10);
+		signal(SIGINT, signal_c);
+		status = getline(&command_line, &line_size, stdin);
+		if (status < 0)
 		{
-			perror("Error! unable to get line");
-			free(inp);
-			exit(0);
+			free(command_line);
+			exit(status_output);
 		}
-		if (getline_handler == 1)
+		if (status == 1)
 		{
-			free(inp);
+			free(command_line);
 			continue;
 		}
-		if (getline_handler != EOF)
+		if (status != EOF)
 		{
-		fork_h = fork();
-		if (fork_h == -1)
-		{
-			perror("Error! cannot fork this process");
-			return (-1);
+			counter++;
+			_strtok(command_line, "\n");
+			if (_myexit(command_line) == 0)
+				return (status_output);
+			if (_myenv(command_line, counter, argv, env) == 0)
+				continue;
+			arg = splitline(command_line);
+			if (arg[0] == NULL)
+			{
+				free(command_line), free(arg);
+				continue;
+			}
+			status_output = execute_process(arg, argv, counter);
 		}
-		else if (fork_h == 0)
-		{
-			printf("I am the child");
-			break;
-		}
-		else
-		{
-			wait(NULL);
-			printf("I am the father");
-			break;
-		}
-	
-
+		free(command_line), free(arg);
 	}
-	return (0);
+	return (status_output);
 }
