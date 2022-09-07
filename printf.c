@@ -90,7 +90,7 @@ int print_str(va_list args)
 int _printf(const char *format, ...)
 {
 form types[] = {
-	{"c", print_char}, {"s", print_str};
+	{"c", print_char}, {"s", print_str},
 	{"d", print_int}, {"i", print_int}, {NULL, NULL}};
 	va_list arguments;
 	int pos = 0, length = 0, pos_form;

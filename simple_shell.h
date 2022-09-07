@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <stdarg.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <string.h>
@@ -35,9 +36,9 @@ char *execute_command(char *argm);
 int _putchar(char c);
 int _printf(const char *format, ...);
 int p_aux_int(long int n, long int);
-int p_str(va_list arguments);
-int p_char(va_list arguments);
-int p_int(va_list arguments);
+int print_str(va_list arguments);
+int print_char(va_list arguments);
+int print_int(va_list arguments);
 extern char **environ;
 char *_getenv(const char *name);
 char *_strcpy(char *dest, char *src);
