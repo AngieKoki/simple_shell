@@ -44,3 +44,67 @@ char *_strtok(char *str, char *c)
 		track = NULL;
 	return (str + j);
 }
+
+/**
+ * _strlen - finds the length of a string
+ * @s: string input
+ * Return: number of bytes of the string
+ */
+
+int _strlen(char *s)
+{
+	int i;
+
+	for (i = 0; s[i]; i++)
+	{
+		continue;
+	}
+	return (i);
+}
+
+/**
+ * _strcpy - copies source to destination
+ * @src: source
+ * @dest: destination
+ * Return: copy of the character
+ */
+
+char *_strcpy(char *src, char *dest)
+{
+	int i;
+
+	i = 0;
+
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+/**
+ * _strcat - Concatenate two strings
+ * @src: first string
+ * @dest: second string
+ * Return: first and second string
+ */
+
+char *_strcat(char *src, char *dest)
+{
+	char *s = src;
+
+	while (*src != '\0')
+	{
+		src++;
+	}
+	while (*dest != '\0')
+	{
+		*src = *dest;
+		src++;
+		dest++;
+	}
+	*src = '\0';
+	return (s);
+}
