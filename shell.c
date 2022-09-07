@@ -4,6 +4,7 @@
  * main - the entry point to the program
  * @argc: the argument counter
  * @argv: the argument vector containing commands passed in
+ * @env: environment variable
  * Return: 0 when successful
  */
 int main(int __attribute__((unused))argc, char *argv[], char **env)

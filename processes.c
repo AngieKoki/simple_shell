@@ -35,23 +35,32 @@ char *execute_command(char *argm)
 	free_list(head);
 	return (NULL);
 }
-int _getchar(void)
+/**
+ * _which - search for a command in the directories
+ * @head: head
+ * @av: arguments
+ * Return: path of a command or nil
+ **/
+char *_which(link_t **head, char *av)
 {
-	static unsigned char buff[BUFF_SIZE];
-	static int index;
-	static int count;
+	link_t *pusher = *head;
+	char *buffer;
 
-	index = 0;
-	count = 0;
-	if (index >= count)
+	if (av[0] == '.' || av[0] == '/')
 	{
-		index = 0;
-		count = read(STDIN_FILENO, buff, BUFF_SIZE);
-		printf("%i\n", count);
-		if (count == 0)
-			return (EOF);
-		if (count < 0)
-			return (EOF);
+		if (access(av, X_OK) == 0)
+			return (av);
 	}
-	return (buff[index++]);
+
+	while (pusher)
+	{
+		buffer = _strcat(pusher->dir, "/", av);
+		if (access(buffer, X_OK) == 0)
+		{
+			return (buffer);
+		}
+		free(buffer);
+		pusher = pusher->next;
+	}
+	return (NULL);
 }
