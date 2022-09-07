@@ -85,26 +85,32 @@ char *_strcpy(char *src, char *dest)
 }
 
 /**
- * _strcat - Concatenate two strings
- * @src: first string
- * @dest: second string
- * Return: first and second string
+ * _strcat - Concatenate two directories with the array[0]
+ * @directory: directories
+ * @slash: /
+ * @arg: array of commands
+ * Return: str
  */
 
-char *_strcat(char *src, char *dest)
+char *_strcat(char *directory, char *slash, char *arg)
 {
-	char *s = src;
+	char *str = NULL;
+	int l1, l2, i, k;
 
-	while (*src != '\0')
-	{
-		src++;
-	}
-	while (*dest != '\0')
-	{
-		*src = *dest;
-		src++;
-		dest++;
-	}
-	*src = '\0';
-	return (s);
+	l1 = _strlen(directory);
+	l2 = _strlen(arg);
+	str = malloc(sizeof(char) * (l1 + l2 + 2));
+	if (!str)
+		return (NULL);
+
+	for (i = 0; directory[i]; i++)
+		str[i] = directory[i];
+	str[i] = *slash;
+	k = i + 1;
+
+	for (i = 0; arg[i]; i++;)
+		str[k + i] = arg[i];
+	str[k + i] = '\0';
+
+	return (str);
 }
