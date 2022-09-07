@@ -4,7 +4,7 @@
 /**
  * _getenv - finds the environment variable name
  * @env_name: the variable name
- * Return: Null if it fails or pointer to the environment variable
+ * Return: Pointer to the environment variable and Null if fails
  */
 char *_getenv(const char *env_name)
 {
@@ -33,12 +33,40 @@ char *_getenv(const char *env_name)
 	return (NULL);
 }
 /**
+ * _getchar - gets the number of characters from the STDIN
+ *
+ * Return: nothing
+ */
+
+int _getchar(void)
+{
+	static unsigned char buff[BUFF_SIZE];
+	static int index;
+	static int count;
+
+	index = 0;
+	count = 0;
+	if (index >= count)
+	{
+		index = 0;
+		count = read(STDIN_FILENO, buff, BUFF_SIZE);
+		printf("%i\n", count);
+		if (count == 0)
+			return (EOF);
+		if (count < 0)
+			return (EOF);
+	}
+	return (buff[index++]);
+}
+
+/**
  * _getline - gets the input line from the prompt
  * @buff: command buffer line
  * @size: size of the command buffer line
  * @stream: file stream
  * Return: number of bytes from the command line input
  */
+
 ssize_t _getline(char **buff, size_t *size, FILE *stream)
 {
 	size_t count = 0;
@@ -69,11 +97,13 @@ ssize_t _getline(char **buff, size_t *size, FILE *stream)
 	return (count);
 
 }
+
 /**
  * splitline - splits lines from the command line input
  * @cmd_line: command line input string
  * Return: a pointer to the array of splitted strings
  */
+
 char **splitline(char *cmd_line)
 {
 	char **str;
@@ -92,12 +122,15 @@ char **splitline(char *cmd_line)
 	str[pos] = NULL;
 	return (str);
 }
+
 /**
  * execute - executes the process
  * @arg: args from the command line
  * @argv: a list of arg strings
  * @counter: number of execution processes
+ * Return: the status output
  */
+
 int execute(char **arg, char **argv, int counter)
 {
 	pid_t child_process;
@@ -132,34 +165,5 @@ int execute(char **arg, char **argv, int counter)
 	if (WIFEXITED(status))
 		status_output = WEXITSTATUS(status);
 	free(buffer);
-	return(status_output);
-}
-/**
- * _which - search ofr a command in the directories
- * @head: head
- * @av: arguments
- * Return: path of a command or nil
- **/
-char *_which(link_t **head, char *av)
-{
-	link_t *pusher = *head;
-	char *buffer;
-
-	if (av[0] == '.' || av[0] == '/')
-	{
-		if (access(av, X_OK) == 0)
-			return (av);
-	}
-
-	while (pusher)
-	{
-		buffer = _strcat(pusher->dir, "/", av);
-		if (access(buffer, X_OK) == 0)
-		{
-			return (buffer);
-		}
-		free(buffer);
-		pusher = pusher->next;
-	}
-	return (NULL);
+	return (status_output);
 }
