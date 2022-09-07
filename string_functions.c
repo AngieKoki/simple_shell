@@ -1,4 +1,4 @@
-#include "main.h"
+#include "simple_shell.h"
 
 /**
  * _strtok - breaks a string into a sequence
@@ -108,7 +108,7 @@ char *_strcat(char *directory, char *slash, char *arg)
 	str[i] = *slash;
 	k = i + 1;
 
-	for (i = 0; arg[i]; i++;)
+	for (i = 0; arg[i]; i++)
 		str[k + i] = arg[i];
 	str[k + i] = '\0';
 

@@ -44,7 +44,7 @@ int main(int __attribute__((unused))argc, char *argv[], char **env)
 				free(command_line), free(arg);
 				continue;
 			}
-			status_output = execute_process(arg, argv, counter);
+			status_output = execute(arg, argv, counter);
 		}
 		free(command_line), free(arg);
 	}

@@ -13,7 +13,7 @@ char *_getenv(const char *env_name)
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		for (j = 0; env_name[i][j] && env_name[j] != '\0'; j++)
+		for (j = 0; env_name[j] == environ[i][j] && env_name[j] != '\0'; j++)
 		{
 			if (env_name[j + 1] == '\0')
 			{
@@ -81,7 +81,7 @@ ssize_t _getline(char **buff, size_t *size, FILE *stream)
 		if (!(*buff))
 			return (-1);
 	}
-	while (c = _getchar() != EOF)
+	while ((c = _getchar()) != EOF)
 	{
 		if (c == '\n')
 		{
@@ -153,7 +153,7 @@ int execute(char **arg, char **argv, int counter)
 		exit(errno);
 	else if (child_process == 0)
 	{
-		if (command _path != NULL)
+		if (command_path != NULL)
 		{
 			if (execve(command_path, arg, environ) == -1)
 				exit(errno);
@@ -164,6 +164,6 @@ int execute(char **arg, char **argv, int counter)
 	wait(&status);
 	if (WIFEXITED(status))
 		status_output = WEXITSTATUS(status);
-	free(buffer);
+	free(buff);
 	return (status_output);
 }

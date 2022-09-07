@@ -1,4 +1,4 @@
-#include "main.h"
+#include "simple_shell.h"
 /**
  * check_path - check if argumnt is already a path
  * @argm: entry argument

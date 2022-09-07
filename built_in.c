@@ -1,4 +1,4 @@
-#include "main.h"
+#include "simple_shell.h"
 /**
  * _myexit - check command line to exit shell
  * @line: command line
