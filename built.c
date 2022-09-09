@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * exit_bul - Exit Statue Shell
+ * exit_shell - Exit Status Shell
  * @cmd: Parsed Command
  * @input: User Input
  * @argv:Program Name
@@ -37,7 +37,7 @@ void exit_shell(char **cmd, char *input, char **argv, int c)
 
 
 /**
- * cd_ - Change Dirctorie
+ * cd_ - Change Dirctories
  * @cmd: Parsed Command
  * @er: Statue Last Command Excuted
  * Return: 0 Succes 1 Failed (For Old Pwd Always 0 Case No Old PWD)
@@ -89,7 +89,7 @@ size_t i;
 	return (0);
 }
 /**
- * display_help - Displaying Help For Builtin
+ * dis_help - Displaying Help For Builtin
  * @cmd:Parsed Command
  * @er: Statue Of Last Command Excuted
  * Return: 0 Succes -1 Fail

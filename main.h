@@ -88,14 +88,15 @@ void exit_file(char **cmd, char *line, FILE *fd);
 
 
 /**
- * struct bulltin - contain bultin to handle and function to excute
+ * struct builtin - contain bultin to handle and function to excute
  * @command:pointer to char
  * @find:function to excute when bultin true
  */
+
 typedef struct builtin
 {
-  char *command;
-  int (*find)(char **line, int er);
-}bul_t;
+	char *command;
+	int (*find)(char **line, int er);
+} bul_t;
 
 #endif
